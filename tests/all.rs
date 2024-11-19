@@ -79,6 +79,19 @@ fn simple_concat() {
 }
 
 #[test]
+fn windows_symlink() {
+    let mut ar = Archive::new(tar!("symlink.tar"));
+    for entry in ar.entries() {
+        match entry {
+            Ok(mut file) => {
+                let entry_type = file.header().entry_type();
+                let path = file.path().unwrap();
+            }
+        }
+    }
+}
+
+#[test]
 fn header_impls() {
     let mut ar = Archive::new(Cursor::new(tar!("simple.tar")));
     let hn = Header::new_old();
